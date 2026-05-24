@@ -1,0 +1,12 @@
+aruco:
+  ros__parameters:
+    squares_x: 5
+    squares_y: 7
+    square_length: 0.04
+    marker_length: 0.03
+    dictionary_id: 0
+    min_corners: 6
+    board_frame_id: "charuco_board"
+    camera_frame_id: "camera"
+    publish_tf: true
+    publish_debug: true
