@@ -1,0 +1,64 @@
+[0.000000] (-) TimerEvent: {}
+[0.000554] (vision) JobQueued: {'identifier': 'vision', 'dependencies': OrderedDict()}
+[0.000973] (vision) JobStarted: {'identifier': 'vision'}
+[0.015870] (vision) JobProgress: {'identifier': 'vision', 'progress': 'cmake'}
+[0.016722] (vision) JobProgress: {'identifier': 'vision', 'progress': 'build'}
+[0.017665] (vision) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/cbm/Documents/rover/ros_ws/build/vision', '--', '-j8', '-l8'], 'cwd': '/home/cbm/Documents/rover/ros_ws/build/vision', 'env': OrderedDict({'USER': 'cbm', 'PTYXIS_VERSION': '50.1', 'XDG_SESSION_TYPE': 'wayland', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/lyrical/opt/gz_math_vendor/lib:/opt/ros/lyrical/opt/gz_utils_vendor/lib:/opt/ros/lyrical/opt/rviz_ogre_vendor/lib:/opt/ros/lyrical/lib/x86_64-linux-gnu:/opt/ros/lyrical/opt/gz_cmake_vendor/lib:/opt/ros/lyrical/lib', 'HOME': '/home/cbm', 'OLDPWD': '/home/cbm/Documents/rover/ros_ws/src', 'LESS': '-R', 'DESKTOP_SESSION': 'ubuntu', 'IM_CONFIG_ENTRY': 'profile', 'ZSH': '/home/cbm/.oh-my-zsh', 'LSCOLORS': 'Gxfxcxdxbxegedabagacad', 'GTK_MODULES': 'gail:atk-bridge', 'PAGER': 'less', 'ROS_PYTHON_VERSION': '3', 'MANAGERPID': '2302', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'SYSTEMD_EXEC_PID': '2911', 'COLORTERM': 'truecolor', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '38451', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'GNOME_KEYRING_CONTROL': '/run/user/1000/keyring', 'WAYLAND_DISPLAY': 'wayland-0', 'ROS_DISTRO': 'lyrical', 'LOGNAME': 'cbm', 'JOURNAL_STREAM': '10:23446', 'MANAGERPIDFDID': '16641', '_': '/usr/bin/colcon', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.SettingsDaemon.MediaKeys.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'ROS_VERSION': '2', 'TERM': 'xterm-256color', 'USERNAME': 'cbm', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'FLATPAK_TTY_PROGRESS': '1', 'PATH': '/opt/ros/lyrical/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'INVOCATION_ID': '399545a722ba4a22a3a4edc8d2b5bbb6', 'GNOME_SETUP_DISPLAY': 'unix:/tmp/.X11-unix/X1', 'PTYXIS_PROFILE': 'beb3f2ba3742a1aafb37c80b6a12c5d5', 'XDG_MENU_PREFIX': 'gnome-', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.IWETP3', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XMODIFIERS': '@im=ibus', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:', 'SSH_AUTH_SOCK': '/run/user/1000/gcr/ssh', 'AMENT_PREFIX_PATH': '/opt/ros/lyrical', 'SHELL': '/bin/bash', 'GDMSESSION': 'ubuntu', 'QT_ACCESSIBILITY': '1', 'GPG_AGENT_INFO': '/run/user/1000/gnupg/S.gpg-agent:0:1', 'QT_IM_MODULE': 'ibus', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/home/cbm/Documents/rover/ros_ws/build/vision', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'XDG_SESSION_EXTRA_DEVICE_ACCESS': 'render:accel', 'PYTHONPATH': '/opt/ros/lyrical/opt/gz_math_vendor/lib/python:/opt/ros/lyrical/lib/python3.14/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'QT_IM_MODULES': 'wayland;ibus', 'VTE_VERSION': '8400', 'CMAKE_PREFIX_PATH': '/opt/ros/lyrical:/opt/ros/lyrical/opt/gz_math_vendor:/opt/ros/lyrical/opt/gz_utils_vendor:/opt/ros/lyrical/opt/gz_cmake_vendor'}), 'shell': False}
+[0.058999] (vision) StdoutLine: {'line': b'-- Found ament_cmake: 2.8.7 (/opt/ros/lyrical/share/ament_cmake/cmake)\n'}
+[0.099526] (-) TimerEvent: {}
+[0.199900] (-) TimerEvent: {}
+[0.300243] (-) TimerEvent: {}
+[0.363956] (vision) StdoutLine: {'line': b'-- Found rclcpp: 32.0.0 (/opt/ros/lyrical/share/rclcpp/cmake)\n'}
+[0.400382] (-) TimerEvent: {}
+[0.417277] (vision) StdoutLine: {'line': b'-- Found rosidl_generator_c: 5.2.0 (/opt/ros/lyrical/share/rosidl_generator_c/cmake)\n'}
+[0.425331] (vision) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 5.2.0 (/opt/ros/lyrical/share/rosidl_generator_cpp/cmake)\n'}
+[0.439404] (vision) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.452864] (vision) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.500498] (-) TimerEvent: {}
+[0.532023] (vision) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 7.10.1 (/opt/ros/lyrical/share/rmw_implementation_cmake/cmake)\n'}
+[0.533864] (vision) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 9.4.8 (/opt/ros/lyrical/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.566912] (vision) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[0.600606] (-) TimerEvent: {}
+[0.654857] (vision) StdoutLine: {'line': b'-- Found sensor_msgs: 5.9.2 (/opt/ros/lyrical/share/sensor_msgs/cmake)\n'}
+[0.700715] (-) TimerEvent: {}
+[0.732762] (vision) StdoutLine: {'line': b'-- Found cv_bridge: 4.1.0 (/opt/ros/lyrical/share/cv_bridge/cmake)\n'}
+[0.746878] (vision) StdoutLine: {'line': b'-- Found image_transport: 6.4.8 (/opt/ros/lyrical/share/image_transport/cmake)\n'}
+[0.762728] (vision) StdoutLine: {'line': b'-- Found tf2_ros: 0.45.7 (/opt/ros/lyrical/share/tf2_ros/cmake)\n'}
+[0.800816] (-) TimerEvent: {}
+[0.900630] (vision) StdoutLine: {'line': b'-- Found tf2_geometry_msgs: 0.45.7 (/opt/ros/lyrical/share/tf2_geometry_msgs/cmake)\n'}
+[0.900878] (-) TimerEvent: {}
+[0.912960] (vision) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.20.6 (/opt/ros/lyrical/share/ament_lint_auto/cmake)\n'}
+[1.001007] (-) TimerEvent: {}
+[1.057281] (vision) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[1.057656] (vision) StdoutLine: {'line': b'-- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/cbm/Documents/rover/ros_ws/src/vision/include>\n'}
+[1.057793] (vision) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[1.058231] (vision) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[1.059311] (vision) StdoutLine: {'line': b"-- Added test 'uncrustify' to check C / C++ code style\n"}
+[1.059483] (vision) StdoutLine: {'line': b'-- Configured uncrustify additional arguments: \n'}
+[1.059833] (vision) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[1.060852] (vision) StdoutLine: {'line': b'-- Configuring done (1.0s)\n'}
+[1.089164] (vision) StdoutLine: {'line': b'-- Generating done (0.0s)\n'}
+[1.101101] (-) TimerEvent: {}
+[1.151763] (vision) StdoutLine: {'line': b'-- Build files have been written to: /home/cbm/Documents/rover/ros_ws/build/vision\n'}
+[1.201247] (-) TimerEvent: {}
+[1.205435] (vision) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/aruco.dir/src/aruco.cpp.o\x1b[0m\n'}
+[1.301381] (-) TimerEvent: {}
+[1.401850] (-) TimerEvent: {}
+[1.502309] (-) TimerEvent: {}
+[1.602758] (-) TimerEvent: {}
+[1.686870] (vision) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/cbm/Documents/rover/ros_ws/src/vision/include/vision/aruco_node.hpp:9\x1b[m\x1b[K,\n'}
+[1.687336] (vision) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/cbm/Documents/rover/ros_ws/src/vision/src/aruco.cpp:1\x1b[m\x1b[K:\n'}
+[1.687654] (vision) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/lyrical/include/tf2_ros/tf2_ros/transform_broadcaster.h:41:4:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K#warning TRANSFORM_BROADCASTER_HEADER_DEPRECATION [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wcpp\x07-Wcpp\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[1.687893] (vision) StderrLine: {'line': b'   41 |   #\x1b[01;35m\x1b[Kwarning\x1b[m\x1b[K TRANSFORM_BROADCASTER_HEADER_DEPRECATION\n'}
+[1.688095] (vision) StderrLine: {'line': b'      |    \x1b[01;35m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[1.702859] (-) TimerEvent: {}
+[1.722641] (vision) StderrLine: {'line': b'\x1b[01m\x1b[K/home/cbm/Documents/rover/ros_ws/src/vision/include/vision/aruco_node.hpp:11:10:\x1b[m\x1b[K \x1b[01;31m\x1b[Kfatal error: \x1b[m\x1b[Kmessage_filters/subscriber.h: No such file or directory\n'}
+[1.722962] (vision) StderrLine: {'line': b'   11 | #include \x1b[01;31m\x1b[K<message_filters/subscriber.h>\x1b[m\x1b[K\n'}
+[1.723160] (vision) StderrLine: {'line': b'      |          \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[1.723375] (vision) StderrLine: {'line': b'compilation terminated.\n'}
+[1.729271] (vision) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/aruco.dir/build.make:79: CMakeFiles/aruco.dir/src/aruco.cpp.o] Error 1\n'}
+[1.730153] (vision) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:153: CMakeFiles/aruco.dir/all] Error 2\n'}
+[1.730649] (vision) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[1.734176] (vision) CommandEnded: {'returncode': 2}
+[1.748082] (vision) JobEnded: {'identifier': 'vision', 'rc': 2}
+[1.758979] (-) EventReactorShutdown: {}

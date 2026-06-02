@@ -1,0 +1,2 @@
+Invoking command in '/home/cbm/Documents/rover/ros_ws/build/vision': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/cbm/Documents/rover/ros_ws/build/vision -- -j8 -l8
+Invoked command in '/home/cbm/Documents/rover/ros_ws/build/vision' returned '2': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/cbm/Documents/rover/ros_ws/build/vision -- -j8 -l8

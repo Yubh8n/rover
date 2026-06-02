@@ -1,0 +1,38 @@
+-- Found ament_cmake: 2.8.7 (/opt/ros/lyrical/share/ament_cmake/cmake)
+-- Found rclcpp: 32.0.0 (/opt/ros/lyrical/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 5.2.0 (/opt/ros/lyrical/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 5.2.0 (/opt/ros/lyrical/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 7.10.1 (/opt/ros/lyrical/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 9.4.8 (/opt/ros/lyrical/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found sensor_msgs: 5.9.2 (/opt/ros/lyrical/share/sensor_msgs/cmake)
+-- Found cv_bridge: 4.1.0 (/opt/ros/lyrical/share/cv_bridge/cmake)
+-- Found image_transport: 6.4.8 (/opt/ros/lyrical/share/image_transport/cmake)
+-- Found tf2_ros: 0.45.7 (/opt/ros/lyrical/share/tf2_ros/cmake)
+-- Found tf2_geometry_msgs: 0.45.7 (/opt/ros/lyrical/share/tf2_geometry_msgs/cmake)
+-- Found ament_lint_auto: 0.20.6 (/opt/ros/lyrical/share/ament_lint_auto/cmake)
+-- Added test 'cppcheck' to perform static code analysis on C / C++ code
+-- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/cbm/Documents/rover/ros_ws/src/vision/include>
+-- Configured cppcheck exclude dirs and/or files: 
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'uncrustify' to check C / C++ code style
+-- Configured uncrustify additional arguments: 
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done (1.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/cbm/Documents/rover/ros_ws/build/vision
+[ 50%] [32mBuilding CXX object CMakeFiles/aruco.dir/src/aruco.cpp.o[0m
+In file included from [01m[K/home/cbm/Documents/rover/ros_ws/src/vision/include/vision/aruco_node.hpp:9[m[K,
+                 from [01m[K/home/cbm/Documents/rover/ros_ws/src/vision/src/aruco.cpp:1[m[K:
+[01m[K/opt/ros/lyrical/include/tf2_ros/tf2_ros/transform_broadcaster.h:41:4:[m[K [01;35m[Kwarning: [m[K#warning TRANSFORM_BROADCASTER_HEADER_DEPRECATION [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wcpp-Wcpp]8;;[m[K]
+   41 |   #[01;35m[Kwarning[m[K TRANSFORM_BROADCASTER_HEADER_DEPRECATION
+      |    [01;35m[K^~~~~~~[m[K
+[01m[K/home/cbm/Documents/rover/ros_ws/src/vision/include/vision/aruco_node.hpp:11:10:[m[K [01;31m[Kfatal error: [m[Kmessage_filters/subscriber.h: No such file or directory
+   11 | #include [01;31m[K<message_filters/subscriber.h>[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+gmake[2]: *** [CMakeFiles/aruco.dir/build.make:79: CMakeFiles/aruco.dir/src/aruco.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:153: CMakeFiles/aruco.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
