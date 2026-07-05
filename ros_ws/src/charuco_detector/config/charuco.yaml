@@ -1,0 +1,23 @@
+charuco_detector:
+  ros__parameters:
+    # Board geometry. squares_x/squares_y = number of chessboard squares.
+    # square_length / marker_length are in METRES and must match your printed board.
+    squares_x: 5
+    squares_y: 7
+    square_length: 0.04
+    marker_length: 0.03
+
+    # ArUco dictionary used to generate the board's markers.
+    # This is the cv::aruco::PredefinedDictionaryType enum value.
+    #   0 = DICT_4X4_50 ... 16 = DICT_6X6_1000 ... 9 = DICT_5X5_1000, etc.
+    dictionary_id: 9   # DICT_5X5_1000
+
+    # Minimum interpolated chessboard corners required before a pose is published.
+    # Max possible = (squares_x - 1) * (squares_y - 1).
+    min_corners: 6
+
+    # Frames and outputs.
+    board_frame_id: charuco_board
+    camera_frame_id: camera
+    publish_tf: true
+    publish_debug: true
