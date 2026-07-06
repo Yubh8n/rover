@@ -18,7 +18,7 @@ find_package(cv_bridge REQUIRED)
 
 add_executable(publisher src/simple_publisher.cpp)
 target_link_libraries(publisher ${OpenCV_LIBS} cv_bridge::cv_bridge)
-ament_target_dependencies(publisher rclcpp std_msgs sensor_msgs)
+# ament_target_dependencies(publisher rclcpp std_msgs sensor_msgs)
 
 install(TARGETS
   publisher

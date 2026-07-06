@@ -93,12 +93,12 @@ class CalibrationNode(Node):
 
     def try_capture(self):
         if self.latest_count < self.min_corners:
-            self.get_logger().warn(
-                f"Only {self.latest_count} corners visible (need >= {self.min_corners}), not captured.")
+            #self.get_logger().warn(
+            #    f"Only {self.latest_count} corners visible (need >= {self.min_corners}), not captured.")
             return
         obj_pts, img_pts = self.board.matchImagePoints(self.latest_corners, self.latest_ids)
         if obj_pts is None or len(obj_pts) < 4:
-            self.get_logger().warn("Could not match enough object/image points, not captured.")
+            #self.get_logger().warn("Could not match enough object/image points, not captured.")
             return
         self.obj_points_views.append(obj_pts)
         self.img_points_views.append(img_pts)
@@ -152,11 +152,12 @@ def main():
             if node.latest_overlay is not None:
                 cv2.imshow(WINDOW, node.latest_overlay)
             key = cv2.waitKey(1) & 0xFF
+            node.try_capture()
             if key == 27:  # ESC
                 node.get_logger().info("Aborted, nothing saved.")
                 break
-            elif key == ord('c'):
-                node.try_capture()
+            # elif key == ord('c'):
+            #     node.try_capture()
             elif key == ord('q'):
                 node.calibrate_and_save()
                 break

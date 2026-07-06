@@ -42,7 +42,8 @@ CharucoDetectorNode::CharucoDetectorNode(const rclcpp::NodeOptions & options)
   // that here is required or the subscription silently never receives anything.
   image_sub_ = std::make_shared<ImageSub>();
   image_sub_->subscribe(this, image_topic_, image_transport_, rmw_qos_profile_sensor_data);
-  info_sub_  = std::make_shared<CameraInfoSub>(this, "camera_info", rmw_qos_profile_sensor_data);
+  //info_sub_  = std::make_shared<CameraInfoSub>(this, "camera_info", rmw_qos_profile_sensor_data);
+  info_sub_ = std::make_shared<CameraInfoSub>(this, "camera_info", rclcpp::SensorDataQoS());
   sync_      = std::make_shared<Sync>(SyncPolicy(10), *image_sub_, *info_sub_);
   sync_->registerCallback(&CharucoDetectorNode::syncCallback, this);
 
