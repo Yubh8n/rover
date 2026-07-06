@@ -8,6 +8,7 @@
 `fastdds discovery -i 0 -p 11811`
 
 #For så at få forbindelse til den DDS server, brug
+
 `export ROS_DISCOVERY_SERVER=192.168.73.141:11811`
 #selvfølgelig med den ip som dds serveren ligger på
 #ikke rode ved porten.
