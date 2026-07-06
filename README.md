@@ -4,6 +4,7 @@
 #en fast DDS server da multicast ikke altid fungerer
 #så godt over wifi, kablet er fint men wifi er skrald.
 #for at starte en dds server på den pågældende maskine brug
+
 ´fastdds discovery -i 0 -p 11811´
 
 #For så at få forbindelse til den DDS server, brug
