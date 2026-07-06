@@ -34,7 +34,7 @@ public:
     cap_.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
     cap_.set(cv::CAP_PROP_FPS, 30);
     cap_.set(cv::CAP_PROP_AUTO_EXPOSURE, 1);  // manual
-    cap_.set(cv::CAP_PROP_EXPOSURE, 500);
+    cap_.set(cv::CAP_PROP_EXPOSURE, 900);
     cap_.set(cv::CAP_PROP_BUFFERSIZE, 1);  // hold frames friske
 
     if (!cap_.isOpened()) {

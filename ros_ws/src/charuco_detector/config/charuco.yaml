@@ -10,7 +10,7 @@ charuco_detector:
     # ArUco dictionary used to generate the board's markers.
     # This is the cv::aruco::PredefinedDictionaryType enum value.
     #   0 = DICT_4X4_50 ... 16 = DICT_6X6_1000 ... 9 = DICT_5X5_1000, etc.
-    dictionary_id: 9   # DICT_5X5_1000
+    dictionary_id: 7   # DICT_5X5_1000
 
     # Minimum interpolated chessboard corners required before a pose is published.
     # Max possible = (squares_x - 1) * (squares_y - 1).
@@ -21,3 +21,9 @@ charuco_detector:
     camera_frame_id: camera
     publish_tf: true
     publish_debug: true
+
+    # Base image topic and image_transport plugin for the input subscription.
+    # "compressed" subscribes to <image_topic>/compressed (JPEG/PNG);
+    # "raw" subscribes to the uncompressed <image_topic> directly.
+    image_topic: /camera/image
+    image_transport: compressed

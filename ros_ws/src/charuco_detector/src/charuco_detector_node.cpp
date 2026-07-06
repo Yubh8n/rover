@@ -20,6 +20,8 @@ CharucoDetectorNode::CharucoDetectorNode(const rclcpp::NodeOptions & options)
   camera_frame_id_ = declare_parameter("camera_frame_id", std::string("camera"));
   publish_tf_      = declare_parameter("publish_tf", true);
   publish_debug_   = declare_parameter("publish_debug", true);
+  image_transport_ = declare_parameter("image_transport", std::string("compressed"));
+  image_topic_     = declare_parameter("image_topic", std::string("image_raw"));
 
   initBoard();
 
@@ -34,8 +36,13 @@ CharucoDetectorNode::CharucoDetectorNode(const rclcpp::NodeOptions & options)
     tf_broadcaster_ = std::make_unique<tf2_ros::TransformBroadcaster>(*this);
   }
 
-  image_sub_ = std::make_shared<ImageSub>(this, "image_raw", rclcpp::QoS(10));
-  info_sub_  = std::make_shared<CameraInfoSub>(this, "camera_info", rclcpp::QoS(10));
+  // Pass the topic directly rather than relying on ROS remapping: SubscriberFilter
+  // appends the transport suffix (e.g. "/compressed") before remap rules would apply.
+  // Camera drivers publish images/camera_info as best-effort (sensor data QoS); matching
+  // that here is required or the subscription silently never receives anything.
+  image_sub_ = std::make_shared<ImageSub>();
+  image_sub_->subscribe(this, image_topic_, image_transport_, rmw_qos_profile_sensor_data);
+  info_sub_  = std::make_shared<CameraInfoSub>(this, "camera_info", rmw_qos_profile_sensor_data);
   sync_      = std::make_shared<Sync>(SyncPolicy(10), *image_sub_, *info_sub_);
   sync_->registerCallback(&CharucoDetectorNode::syncCallback, this);
 

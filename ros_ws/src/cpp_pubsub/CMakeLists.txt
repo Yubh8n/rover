@@ -9,6 +9,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
 find_package(OpenCV 4.7 REQUIRED)
 find_package(cv_bridge REQUIRED)
 # uncomment the following section in order to fill in
@@ -16,7 +17,8 @@ find_package(cv_bridge REQUIRED)
 # find_package(<dependency> REQUIRED)
 
 add_executable(publisher src/simple_publisher.cpp)
-target_link_libraries(publisher rclcpp::rclcpp std_msgs::std_msgs ${OpenCV_LIBS} cv_bridge::cv_bridge)
+target_link_libraries(publisher ${OpenCV_LIBS} cv_bridge::cv_bridge)
+ament_target_dependencies(publisher rclcpp std_msgs sensor_msgs)
 
 install(TARGETS
   publisher

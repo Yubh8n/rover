@@ -47,6 +47,9 @@ install(TARGETS charuco_detector_node
 install(DIRECTORY config launch
   DESTINATION share/${PROJECT_NAME})
 
+install(PROGRAMS scripts/calibrate_charuco.py
+  DESTINATION lib/${PROJECT_NAME})
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   set(ament_cmake_copyright_FOUND TRUE)

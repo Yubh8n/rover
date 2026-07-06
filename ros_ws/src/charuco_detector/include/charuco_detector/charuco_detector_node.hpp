@@ -8,6 +8,8 @@
 #include <cv_bridge/cv_bridge.hpp>
 #include <tf2_ros/transform_broadcaster.hpp>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
+#include <image_transport/image_transport.hpp>
+#include <image_transport/subscriber_filter.hpp>
 #include <message_filters/subscriber.hpp>
 #include <message_filters/synchronizer.hpp>
 #include <message_filters/sync_policies/approximate_time.hpp>
@@ -51,6 +53,8 @@ private:
   std::string camera_frame_id_;
   bool        publish_tf_;
   bool        publish_debug_;
+  std::string image_transport_;
+  std::string image_topic_;
 
   // OpenCV 4.7+ objects are held by value (no more cv::Ptr factory functions).
   // Seeded with a valid placeholder board so we never invoke the deprecated
@@ -64,7 +68,7 @@ private:
   rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr             detected_pub_;
   std::unique_ptr<tf2_ros::TransformBroadcaster>               tf_broadcaster_;
 
-  using ImageSub      = message_filters::Subscriber<sensor_msgs::msg::Image>;
+  using ImageSub      = image_transport::SubscriberFilter;
   using CameraInfoSub = message_filters::Subscriber<sensor_msgs::msg::CameraInfo>;
   using SyncPolicy    = message_filters::sync_policies::ApproximateTime<
                           sensor_msgs::msg::Image, sensor_msgs::msg::CameraInfo>;

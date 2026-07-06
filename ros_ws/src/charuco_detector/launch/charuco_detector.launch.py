@@ -18,13 +18,19 @@ def generate_launch_description():
     )
     image_arg = DeclareLaunchArgument(
         "image_topic",
-        default_value="/image_raw",
-        description="Raw camera image topic to subscribe to.",
+        default_value="/camera/image",
+        description="Base camera image topic (image_transport appends the "
+                     "transport suffix, e.g. '/compressed').",
     )
     info_arg = DeclareLaunchArgument(
         "camera_info_topic",
         default_value="/camera_info",
         description="CameraInfo topic (intrinsics) to subscribe to.",
+    )
+    transport_arg = DeclareLaunchArgument(
+        "image_transport",
+        default_value="compressed",
+        description="image_transport plugin for the input image (e.g. 'raw' or 'compressed').",
     )
 
     node = Node(
@@ -32,11 +38,18 @@ def generate_launch_description():
         executable="charuco_detector_node",
         name="charuco_detector",
         output="screen",
-        parameters=[LaunchConfiguration("params_file")],
+        parameters=[
+            LaunchConfiguration("params_file"),
+            {
+                "image_transport": LaunchConfiguration("image_transport"),
+                "image_topic": LaunchConfiguration("image_topic"),
+            },
+        ],
         remappings=[
-            ("image_raw", LaunchConfiguration("image_topic")),
             ("camera_info", LaunchConfiguration("camera_info_topic")),
         ],
     )
 
-    return LaunchDescription([params_arg, image_arg, info_arg, node])
+    return LaunchDescription(
+        [params_arg, image_arg, info_arg, transport_arg, node]
+    )
