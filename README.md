@@ -8,7 +8,7 @@
 `fastdds discovery -i 0 -p 11811`
 
 #For så at få forbindelse til den DDS server, brug
-'''export ROS_DISCOVERY_SERVER=192.168.73.141:11811'''
+`export ROS_DISCOVERY_SERVER=192.168.73.141:11811`
 #selvfølgelig med den ip som dds serveren ligger på
 #ikke rode ved porten.
 
@@ -17,4 +17,4 @@
 #Der er åbenbart en flaskehals når man skal køre med højere opløsning og framerate.
 #Man kan sætte miljøvariablen FASTDDS_BUILTIN_TRANSPORTS=UDPv4 for at bruge UDP i stedet for TCP, hvilket kan give bedre performance.
 
-'''export FASTDDS_BUILTIN_TRANSPORTS=UDPv4'''
+`export FASTDDS_BUILTIN_TRANSPORTS=UDPv4`
