@@ -5,7 +5,7 @@ ser.reset_input_buffer()
 
 
 def main() -> None:
-    ser.write(f"V\n".encode())
+    ser.write(f"V 100 -100\n".encode())
     while True:
         if ser.in_waiting > 0:
             line = ser.readline().decode('utf-8').rstrip()
