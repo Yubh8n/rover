@@ -25,20 +25,45 @@
 // }
 
 
-
-
 #include <Wire.h>
 #include <Arduino.h>
 
+void parseLine(char* line);
+char buf[32];
+uint8_t idx = 0;
+
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   Wire.begin();
 }
 
 void loop() {
-
-
-  Serial.print("test");
-  delay(100);
+  while (Serial.available())
+  {
+    char c = Serial.read();
+    if (c == '\n'){
+      buf[idx] = '\0';
+      parseLine(buf);
+      idx = 0;
+    }
+    else if (idx < sizeof(buf) - 1)
+    {
+      buf[idx++] = c;
+    }
+    else
+    {
+      idx = 0;
+    }
+  }
 }
 
+void parseLine(char* line) {
+  if (line[0] == 'V') {
+    int l, r;
+    if (sscanf(line + 1, "%d %d", &l, &r) == 2) {
+      // setMotors(l, r);
+      Serial.print("Setting motors: ");
+      // lastCmd = millis();
+    }
+  }
+}
