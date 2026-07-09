@@ -27,7 +27,11 @@
 
 #include <Wire.h>
 #include <Arduino.h>
+#include <Servo.h>
 
+Servo ESC;
+ESC.attach(A0, 1000,2000);
+ESC.write(0);
 void parseLine(char* line);
 char buf[32];
 uint8_t idx = 0;
@@ -61,7 +65,7 @@ void parseLine(char* line) {
   if (line[0] == 'V') {
     int l, r;
     if (sscanf(line + 1, "%d %d", &l, &r) == 2) {
-      // setMotors(l, r);
+    ESC.write(l);
       Serial.print("Setting motors: ");
       // lastCmd = millis();
     }
