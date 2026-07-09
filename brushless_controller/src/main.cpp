@@ -2,41 +2,60 @@
 // #include <Servo.h>
 
 // Servo ESC;
+// Servo ESC1;
+
+// volatile unsigned long pulseCount = 0;
+// const float PULSES_PER_REV = 270.0;
+
+// void countPulse()
+// {
+//   pulseCount++;
+// }
 // void setup() {
 
-//   // put your setup code here, to run once:
 //   Serial.begin(115200);
-//   //pinMode(A0, OUTPUT); //PWM PIN 11  with PWM wire
-//   //analogWriteRange(255);     // now 255 == 100% duty, explicit  
-//   //analogWriteFreq(50);     // 1 kHz default is fine for most small motors
-//   ESC.attach(A0, 1000,2000);
-//   ESC.write(180);
-//   pinMode(D2, OUTPUT); //PWM PIN 11  with PWM wire
-//   digitalWrite(D2, HIGH);
+//   pinMode(9, OUTPUT); //PWM PIN 11  with PWM wire
+//   // ESC.attach(9);
+//   // ESC.writeMicroseconds(1000);
+//   analogWrite(9, 255);
+//   pinMode(8, OUTPUT); //PWM PIN 11  with PWM wire
+//   pinMode(2, INPUT_PULLUP); //PWM PIN 11  with PWM wire
+//   digitalWrite(8, HIGH);
+//   attachInterrupt(digitalPinToInterrupt(2), countPulse, RISING);
 // }
 
 // void loop() {
-//   // analogWrite(A0, 255);  //input speed (must be int)
-//   // Serial.println("on");
-//   // delay(2000);
-//   // analogWrite(A0, 0);  //input speed (must be int)
-//   // Serial.println("off");
-//   // delay(2000);
+//   static unsigned long lastTime = 0;
+//   unsigned long now = millis();
+
+//   if (now - lastTime >= 100) {   // opdater hver 100 ms
+//     noInterrupts();
+//     unsigned long count = pulseCount;
+//     pulseCount = 0;
+//     interrupts();
+
+//     float dt = (now - lastTime) / 1000.0;
+//     float rps = count / PULSES_PER_REV / dt;
+//     float rpm = rps * 60.0;
+
+//     Serial.print("RPM: ");
+//     Serial.println(rpm);
+
+//     lastTime = now;
+//   }
 // }
 
 
 #include <Wire.h>
 #include <Arduino.h>
-#include <Servo.h>
 
-Servo ESC;
-ESC.attach(A0, 1000,2000);
-ESC.write(0);
 void parseLine(char* line);
 char buf[32];
 uint8_t idx = 0;
 
 void setup() {
+  pinMode(9, OUTPUT); //PWM PIN 11  with PWM wire
+  analogWrite(9,255);
   Serial.begin(115200);
   Wire.begin();
 }
@@ -65,9 +84,8 @@ void parseLine(char* line) {
   if (line[0] == 'V') {
     int l, r;
     if (sscanf(line + 1, "%d %d", &l, &r) == 2) {
-    ESC.write(l);
+      analogWrite(9, 255-l);
       Serial.print("Setting motors: ");
-      // lastCmd = millis();
     }
   }
 }
