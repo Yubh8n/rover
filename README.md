@@ -20,3 +20,7 @@ Der er åbenbart en flaskehals når man skal køre med højere opløsning og fra
 Man kan sætte miljøvariablen FASTDDS_BUILTIN_TRANSPORTS=UDPv4 for at bruge UDP i stedet for TCP, hvilket kan give bedre performance.
 
 `export FASTDDS_BUILTIN_TRANSPORTS=UDPv4`
+
+To make the rover move with full speed:
+
+`ros2 topic pub -1 /motor_speed std_msgs/msg/UInt8 "{data: 255}"`
