@@ -46,6 +46,12 @@
 // }
 
 
+/*Blå ved motor input er PWM til at styre motor.*/
+/*Rød 12V*/
+/*Sort Ground*/
+/*Gul DIR*/
+/*Grøn ENCODER.*/
+
 #include <Wire.h>
 #include <Arduino.h>
 
@@ -54,7 +60,7 @@ char buf[32];
 uint8_t idx = 0;
 
 void setup() {
-  pinMode(9, OUTPUT); //PWM PIN 11  with PWM wire
+  pinMode(9, OUTPUT); //PWM PIN 9 with PWM wire.
   analogWrite(9,255);
   Serial.begin(115200);
   Wire.begin();
@@ -85,7 +91,12 @@ void parseLine(char* line) {
     int l, r;
     if (sscanf(line + 1, "%d %d", &l, &r) == 2) {
       analogWrite(9, 255-l);
-      Serial.print("Setting motors: ");
+      analogWrite(10, 255-r);
+      Serial.print("Gotten LR: ");
+      Serial.print(l);
+      Serial.print(" ");
+      Serial.println(r);
+
     }
   }
 }
