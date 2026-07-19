@@ -52,6 +52,15 @@
 /*Gul DIR*/
 /*Grøn ENCODER.*/
 
+// LEFT MOTOR
+// PIN 10 blå kort wire. (PWM SIGNAL)
+// PIN 6  gul kort wire. (DIR)
+
+
+//FORWARD
+//  digitalWrite(6, LOW);
+
+
 #include <Wire.h>
 #include <Arduino.h>
 
@@ -60,8 +69,11 @@ char buf[32];
 uint8_t idx = 0;
 
 void setup() {
-  pinMode(9, OUTPUT); //PWM PIN 9 with PWM wire.
-  analogWrite(9,255);
+  pinMode(6, OUTPUT);
+  digitalWrite(6, LOW);
+  // pinMode(9, OUTPUT); //PWM PIN 9 with PWM wire.
+  // pinMode(10, OUTPUT);
+  // analogWrite(10,0);
   Serial.begin(115200);
   Wire.begin();
 }
@@ -90,13 +102,15 @@ void parseLine(char* line) {
   if (line[0] == 'V') {
     int l, r;
     if (sscanf(line + 1, "%d %d", &l, &r) == 2) {
-      analogWrite(9, 255-l);
+      
+      
+      //analogWrite(9, 255-l);
+      digitalWrite(6, HIGH);
       analogWrite(10, 255-r);
       Serial.print("Gotten LR: ");
       Serial.print(l);
       Serial.print(" ");
       Serial.println(r);
-
     }
   }
 }

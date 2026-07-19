@@ -2,12 +2,14 @@ import serial
 import time
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import UInt8
+from std_msgs.msg import Int8
+from geometry_msgs.msg import Twist, Vector3
 
 class arduino_com(Node):
     def __init__(self):
         super().__init__('arduino_com')
-        self.sub = self.create_subscription(UInt8, 'motor_speed', self.motor_callback, 1)
+        self.sub = self.create_subscription(Int8, 'motor_speed', self.motor_callback, 1)
+        self.twist_sub = self.create_subscription(Twist, "com/motor_twist", self.motor_twist, 1)
         self.ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1)
         time.sleep(2)
         self.ser.reset_input_buffer()
@@ -16,6 +18,9 @@ class arduino_com(Node):
         self.R = 0
         self.response_gotten = True
         print("Arduino com ready. ")
+
+    def motor_twist(self, data=Twist):
+        pass
 
     # FIT0441 (12VDC BLDC) #
     def motor_callback(self, data):
