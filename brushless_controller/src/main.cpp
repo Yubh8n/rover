@@ -1,64 +1,26 @@
-// #include <Arduino.h>
-// #include <Servo.h>
-
-// Servo ESC;
-// Servo ESC1;
-
-// volatile unsigned long pulseCount = 0;
-// const float PULSES_PER_REV = 270.0;
-
-// void countPulse()
-// {
-//   pulseCount++;
-// }
-// void setup() {
-
-//   Serial.begin(115200);
-//   pinMode(9, OUTPUT); //PWM PIN 11  with PWM wire
-//   // ESC.attach(9);
-//   // ESC.writeMicroseconds(1000);
-//   analogWrite(9, 255);
-//   pinMode(8, OUTPUT); //PWM PIN 11  with PWM wire
-//   pinMode(2, INPUT_PULLUP); //PWM PIN 11  with PWM wire
-//   digitalWrite(8, HIGH);
-//   attachInterrupt(digitalPinToInterrupt(2), countPulse, RISING);
-// }
-
-// void loop() {
-//   static unsigned long lastTime = 0;
-//   unsigned long now = millis();
-
-//   if (now - lastTime >= 100) {   // opdater hver 100 ms
-//     noInterrupts();
-//     unsigned long count = pulseCount;
-//     pulseCount = 0;
-//     interrupts();
-
-//     float dt = (now - lastTime) / 1000.0;
-//     float rps = count / PULSES_PER_REV / dt;
-//     float rpm = rps * 60.0;
-
-//     Serial.print("RPM: ");
-//     Serial.println(rpm);
-
-//     lastTime = now;
-//   }
-// }
-
-
 /*Blå ved motor input er PWM til at styre motor.*/
 /*Rød 12V*/
 /*Sort Ground*/
 /*Gul DIR*/
 /*Grøn ENCODER.*/
 
-// LEFT MOTOR
-// PIN 10 blå kort wire. (PWM SIGNAL)
-// PIN 6  gul kort wire. (DIR)
-
+// RIGHT MOTOR
+// PIN 8 gul wire. (DIR) TESTET OG KORREKT
+// PIN 9 blå wire. (PWM SIGNAL) TESTET OG KORREKT
 
 //FORWARD
-//  digitalWrite(6, LOW);
+//  digitalWrite(8, HIGH); TESTET OG KORREKT
+//BACKWARD
+//  digitalWrite(8, LOW); TESTET OG KORREKT
+
+// LEFT MOTOR
+// PIN 10 blå kort wire. (PWM SIGNAL) TESTET OG KORREKT
+// PIN 6  gul kort wire. (DIR) TESTET OG KORREKT
+
+//FORWARD
+//  digitalWrite(6, LOW); TESTET OG KORREKT
+//BACKWARD
+//  digitalWrite(6, HIGH); TESTET OG KORREKT
 
 
 #include <Wire.h>
@@ -70,10 +32,13 @@ uint8_t idx = 0;
 
 void setup() {
   pinMode(6, OUTPUT);
-  digitalWrite(6, LOW);
+  pinMode(8, OUTPUT);
+  digitalWrite(6, HIGH);
+  digitalWrite(8, LOW);
   // pinMode(9, OUTPUT); //PWM PIN 9 with PWM wire.
   // pinMode(10, OUTPUT);
   // analogWrite(10,0);
+  // analogWrite(9,0);
   Serial.begin(115200);
   Wire.begin();
 }
