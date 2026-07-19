@@ -75,8 +75,6 @@ public:
           msg.format = "jpeg";
           msg.data.assign(buf.data, buf.data + buf.total() * buf.elemSize());
           jpeg_publisher_->publish(std::move(msg));
-          RCLCPP_INFO(this->get_logger(), "Buffer: %zu bytes, dims: %dx%d",
-          buf.total() * buf.elemSize(), buf.cols, buf.rows);
         }
       }
     });
