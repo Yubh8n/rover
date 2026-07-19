@@ -22,7 +22,7 @@ public:
   : Node("simple_publisher")
   {
     publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);
-    cv_publisher_ = this->create_publisher<sensor_msgs::msg::Image>("camera/image", rclcpp::SensorDataQoS());
+    cv_publisher_ = this->create_publisher<sensor_msgs::msg::Image>("camera/mjpg", rclcpp::SensorDataQoS());
     jpeg_publisher_ = this->create_publisher<sensor_msgs::msg::CompressedImage>(
   "camera/image/compressed", rclcpp::SensorDataQoS());
 
@@ -82,6 +82,13 @@ public:
     });
   }
 
+  ~SimplePublisher() override {
+  running_ = false;
+  if (capture_thread_.joinable()) {
+    capture_thread_.join();
+  }
+}
+
 private:
   std::thread capture_thread_;
   std::atomic<bool> running_{true};
@@ -93,15 +100,23 @@ private:
   cv_bridge::CvImagePtr cv_ptr;
 };
 
-int main(int argc, char * argv[])
-{
+// int main(int argc, char * argv[])
+// {
+//   rclcpp::init(argc, argv);
+//   rclcpp::spin(std::make_shared<SimplePublisher>());
+//   rclcpp::shutdown();
+//   return 0;
+// }
+
+int main(int argc, char** argv) {
   rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<SimplePublisher>());
+  {
+    auto node = std::make_shared<SimplePublisher>();
+    rclcpp::spin(node);
+  }  // node destrueres her, tråden joines
   rclcpp::shutdown();
   return 0;
 }
-
-
 
 //Dette er åbenbart en flaskehals når man skal køre med højere opløsning og framerate. Man kan sætte miljøvariablen FASTDDS_BUILTIN_TRANSPORTS=UDPv4 for at bruge UDP i stedet for TCP, hvilket kan give bedre performance.
 // export FASTDDS_BUILTIN_TRANSPORTS=UDPv4

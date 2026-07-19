@@ -1,6 +1,7 @@
 import serial
 import time
 import rclpy
+from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
 from std_msgs.msg import Int8
 from geometry_msgs.msg import Twist, Vector3
@@ -37,14 +38,26 @@ class arduino_com(Node):
         if not self.response_gotten:
             self.ser.write(f"V {self.L} {self.R}\n".encode())
 
-def main() -> None:
-    rclpy.init()
+def main(args=None):
+    rclpy.init(args=args)
     node = arduino_com()
     try:
         rclpy.spin(node)
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, ExternalShutdownException):
         pass
-    rclpy.shutdown()
+    finally:
+        node.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
+    
+    
+    # rclpy.init()
+    # node = arduino_com()
+    # try:
+    #     rclpy.spin(node)
+    # except KeyboardInterrupt:
+    #     pass
+    # rclpy.shutdown()
 
     # while True:
     #     if ser.in_waiting > 0:
