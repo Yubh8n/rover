@@ -82,8 +82,12 @@ float measureRpm(Wheel& w) {
   interrupts();
 
   if (period == 0) return 0.0;
-  if (micros() - lastPulse > PULSE_TIMEOUT_US) return 0.0;  // stået stille
-  return 60.0e6 / (PULSES_PER_REV * (float)period);
+  unsigned long sinceLast = micros() - lastPulse;
+  if (sinceLast > PULSE_TIMEOUT_US) return 0.0;
+  // Hvis der er gået længere end sidste periode, er hjulet
+  // langsommere end sidste måling viser — brug den længste af de to:
+  unsigned long effPeriod = max(period, sinceLast);
+  return 60.0e6 / (PULSES_PER_REV * (float)effPeriod);
 }
 
 // dirPin-logik: LEFT frem = LOW, RIGHT frem = HIGH
@@ -108,16 +112,22 @@ void controlWheel(Wheel& w, float dt) {
 
   // Retningsskift: brems til stilstand før DIR flippes
   if (spForward != w.dirForward) {
-    w.changingDir = true;
+    if (rpm < RPM_STOPPED + 15.0) {   // < ~20 RPM: sikkert at flippe direkte
+      w.dirForward = spForward;
+      w.integral = 0;
+      w.changingDir = false;
+    } else {
+      w.changingDir = true;
+    }
   }
   if (w.changingDir) {
     w.pwm = 0;
     w.integral = 0;
-    if (rpm < RPM_STOPPED) {
+    if (rpm < RPM_STOPPED + 15.0) {
       w.dirForward = spForward;
       w.changingDir = false;
     }
-    return;   // regulér først når retningen er flippet
+    return;
   }
 
   // PI på magnitude
@@ -142,10 +152,10 @@ void parseLine(char* line) {
   if (line[0] == 'V') {
     int l, r;
     if (sscanf(line + 1, "%d %d", &l, &r) == 2) {
-      // NB: A/B ↔ L/R mapping — ret her når encoderne er identificeret!
-      // Antagelse: A = venstre, B = højre
-      wA.setpoint = (float)l;
-      wB.setpoint = (float)r;
+      // wA driver den FYSISK HØJRE motor → får r
+      // wB driver den FYSISK VENSTRE motor → får l
+      wA.setpoint = (float)r;
+      wB.setpoint = (float)l;
       lastCmd = millis();
     }
   }
@@ -198,8 +208,11 @@ void loop() {
     controlWheel(wB, dt);
 
     // NB: A = venstre (PWM_L), B = højre (PWM_R) — ret hvis omvendt!
-    applyOutput(wA, PWM_L, DIR_L, false);  // LEFT: frem = LOW
-    applyOutput(wB, PWM_R, DIR_R, true);   // RIGHT: frem = HIGH
+    // applyOutput(wA, PWM_L, DIR_L, false);  // LEFT: frem = LOW
+    // applyOutput(wB, PWM_R, DIR_R, true);   // RIGHT: frem = HIGH
+
+    applyOutput(wA, PWM_R, DIR_R, true);   // encoder A ↔ højre motor
+    applyOutput(wB, PWM_L, DIR_L, false);  // encoder B ↔ venstre motor
   }
 
   // --- Telemetri hver 250ms ---

@@ -13,7 +13,8 @@ class arduino_com(Node):
         self.declare_parameter('track_width', 0.15)
         self.declare_parameter('wheel_diameter', 43.5/1000)
         self.declare_parameter('max_rpm', 159.0)
-        self.twist_sub = self.create_subscription(Twist, "com/motor_twist", self.motor_twist, 1)
+        self.rx_buf = b""
+        self.twist_sub = self.create_subscription(Twist, "cmd_vel", self.motor_twist, 1)
         self.ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1)
         time.sleep(2)
         self.ser.reset_input_buffer()
@@ -39,11 +40,23 @@ class arduino_com(Node):
         self.L = int(max(-max_rpm, min(max_rpm, rpm_l)))
         self.R = int(max(-max_rpm, min(max_rpm, rpm_r)))
 
+    # def test(self):
+    #     while self.ser.in_waiting > 0:
+    #         line = self.ser.readline().decode('utf-8', errors='ignore').rstrip()
+    #         if line:
+    #             self.get_logger().info(line)
+    #     self.ser.write(f"V {self.L} {self.R}\n".encode())
+
     def test(self):
-        while self.ser.in_waiting > 0:
-            line = self.ser.readline().decode('utf-8', errors='ignore').rstrip()
-            if line:
-                self.get_logger().info(line)
+    # Ikke-blokerende: læs alt der ligger klar, parse hele linjer
+        if self.ser.in_waiting > 0:
+            self.rx_buf += self.ser.read(self.ser.in_waiting)
+            while b'\n' in self.rx_buf:
+                raw, self.rx_buf = self.rx_buf.split(b'\n', 1)
+                line = raw.decode('utf-8', errors='ignore').strip()
+                if line:
+                    self.get_logger().info(line)
+
         self.ser.write(f"V {self.L} {self.R}\n".encode())
 
 def main(args=None):
