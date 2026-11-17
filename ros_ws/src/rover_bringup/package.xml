@@ -12,7 +12,6 @@
   <test_depend>ament_pep257</test_depend>
   <test_depend>python3-pytest</test_depend>
 
-  <exec_depend>arduino_com</exec_depend>
   <exec_depend>cpp_pubsub</exec_depend>
 
   <export>
