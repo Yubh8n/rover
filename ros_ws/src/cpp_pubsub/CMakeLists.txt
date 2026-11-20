@@ -10,7 +10,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
-find_package(OpenCV 4.7 REQUIRED)
+find_package(OpenCV 4 REQUIRED)   # only VideoCapture/Mat; any OpenCV 4 will do
 find_package(cv_bridge REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.

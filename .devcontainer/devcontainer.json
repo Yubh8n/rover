@@ -1,0 +1,66 @@
+// Rover ROS 2 working container for VS Code (Dev Containers extension).
+// "Reopen in Container" builds .devcontainer/Dockerfile and opens the repo in it.
+{
+  "name": "Rover ROS 2",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": { "USERNAME": "${localEnv:USER}" }
+  },
+
+  // Same path as on the host: Claude finds its project memory by path
+  // (~/.claude/projects/-home-<you>-Documents-github-rover-ros2), and
+  // colcon build/install paths stay valid on both sides.
+  "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
+  "workspaceFolder": "${localWorkspaceFolder}",
+
+  "remoteUser": "${localEnv:USER}",
+  "updateRemoteUserUID": true,
+
+  "runArgs": [
+    // Host network + IPC: DDS discovery/shared memory talks to the Pi and host ROS nodes
+    "--network=host",
+    "--ipc=host",
+    // USB: cameras (/dev/video*), serial ports, incl. devices plugged in later
+    "--privileged",
+    "-v", "/dev:/dev",
+    "-v", "/run/udev:/run/udev:ro"
+  ],
+
+  "mounts": [
+    // Claude Code: memory, settings, login - shared with the host
+    "source=${localEnv:HOME}/.claude,target=/home/${localEnv:USER}/.claude,type=bind",
+    // ~/.claude.json is a single file that Claude rewrites; a file bind mount
+    // breaks atomic renames, so mount it read-only and copy it in (postCreate).
+    "source=${localEnv:HOME}/.claude.json,target=/home/${localEnv:USER}/.claude-host.json,type=bind,readonly",
+    // SSH config + known_hosts (keys come through the forwarded SSH agent)
+    "source=${localEnv:HOME}/.ssh,target=/home/${localEnv:USER}/.ssh,type=bind,readonly",
+    // X11: GUI tools (rqt, rviz2, cv2.imshow) show on the host display
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
+    // mDNS: the host's avahi-daemon resolves <name>.local (the Pi is rover101.local).
+    // The folder, not the socket, so an avahi restart on the host keeps working.
+    "source=/run/avahi-daemon,target=/run/avahi-daemon,type=bind"
+  ],
+
+  // Claude login copy, and the rover-on / rover-off / rover-status helpers
+  // (.devcontainer/rover-env.sh, edits apply to new terminals without a rebuild)
+  "postCreateCommand": "cp -n ~/.claude-host.json ~/.claude.json && chmod 600 ~/.claude.json && (grep -q rover-env.sh ~/.bashrc || echo 'rover_env=${containerWorkspaceFolder}/.devcontainer/rover-env.sh; [ -f $rover_env ] && source $rover_env' >> ~/.bashrc)",
+
+  "containerEnv": {
+    "DISPLAY": "${localEnv:DISPLAY}",
+    // The Pi's nodes (mavros, stm32_link) use the Fast DDS discovery server on
+    // the Pi: switch to it with `rover-on`, back with `rover-off` (rover-env.sh).
+    "ROS_DOMAIN_ID": "0"
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code",
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools",
+        "ms-python.python",
+        "ms-iot.vscode-ros"
+      ]
+    }
+  }
+}

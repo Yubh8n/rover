@@ -1,0 +1,28 @@
+# STM32 link (rover_stm32/stm32_link) on the Raspberry Pi, started at boot.
+#
+# Install (once):
+#   sudo cp ~/stm32_ws/src/rover_stm32/systemd/stm32_link.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now stm32_link
+#
+# Firmware update with fwupdate.py / ./fw deploy-pi / the CI deploy job needs the
+# serial port: `sudo systemctl stop stm32_link` first (or use the ~/update service).
+[Unit]
+Description=STM32 link (firmware info, update, app messages)
+After=DDS.service
+Requires=DDS.service
+
+[Service]
+User=cbm
+SupplementaryGroups=dialout plugdev
+Environment=ROS_DOMAIN_ID=0
+Environment=RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+Environment=ROS_DISCOVERY_SERVER=127.0.0.1:11811
+Environment=PYTHONUNBUFFERED=1
+# No port parameter = find the Nucleo's ST-Link by itself (never the Pixhawk on
+# /dev/ttyAMA0). For a fixed port add: --ros-args -p port:=/dev/serial/by-id/...
+ExecStart=/bin/bash -c 'source /opt/ros/jazzy/setup.bash && source /home/cbm/stm32_ws/install/setup.bash && exec ros2 run rover_stm32 stm32_link'
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

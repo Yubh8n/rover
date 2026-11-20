@@ -1,0 +1,27 @@
+# Rover ROS 2 stack on the Raspberry Pi: rover_bringup/rover.launch.py from the
+# workspace that tools/deploy-rover.sh activated (~/rover_ws/current).
+#
+# Installed and kept up to date by tools/deploy-rover.sh (@USER@ and @HOME@ are
+# filled in there). Logs: journalctl -u rover -f
+[Unit]
+Description=Rover ROS 2 (rover_bringup)
+After=DDS.service mavros.service
+Requires=DDS.service
+
+[Service]
+User=@USER@
+SupplementaryGroups=dialout plugdev video
+Environment=ROS_DOMAIN_ID=0
+Environment=RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+Environment=ROS_DISCOVERY_SERVER=127.0.0.1:11811
+Environment=PYTHONUNBUFFERED=1
+Environment=RCUTILS_COLORIZED_OUTPUT=0
+ExecStart=/bin/bash -c 'source /opt/ros/jazzy/setup.bash && source @HOME@/rover_ws/current/install/setup.bash && exec ros2 launch rover_bringup rover.launch.py'
+# ros2 launch shuts its nodes down cleanly on SIGINT (like Ctrl-C)
+KillSignal=SIGINT
+TimeoutStopSec=20
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

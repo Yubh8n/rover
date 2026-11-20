@@ -1,0 +1,6 @@
+# Boot an already flashed slot on trial (after reset, unless no_reset)
+string slot                     # "A" or "B"
+bool no_reset
+---
+bool success
+string message

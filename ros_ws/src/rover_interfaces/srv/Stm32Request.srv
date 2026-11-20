@@ -1,0 +1,9 @@
+# Send an application command (0x40..0x7F) and wait for its reply
+uint8 cmd
+uint8[] payload
+float32 timeout                 # seconds, 0 = 1.0
+---
+bool success
+uint8 status                    # status byte of the reply (0 = OK), 255 if no reply
+string message
+uint8[] payload                 # reply payload after the status byte

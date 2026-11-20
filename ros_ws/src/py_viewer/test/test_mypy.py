@@ -12,8 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from ament_mypy.main import main
 import pytest
+
+# ament_mypy is not installed everywhere (ros-jazzy-ament-mypy): skip instead of erroring
+main = pytest.importorskip('ament_mypy.main').main
 
 
 @pytest.mark.mypy

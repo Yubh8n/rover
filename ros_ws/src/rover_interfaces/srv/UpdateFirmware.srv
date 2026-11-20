@@ -1,0 +1,12 @@
+# Firmware update over the STM32 link (same flow as tools/fwupdate.py update).
+# Do NOT update while the Rover is driving: the G431 pauses while flash is written.
+string source                   # path on the node's machine: build folder with rover_app_A/B.bin,
+                                # or a rover-fw-<board>-<version>.tar.gz package
+string slot                     # "" = the slot not running, or "A" / "B"
+bool no_reset                   # write + activate only; boots on the next reset
+uint16 wait_s                   # how long to wait for the confirm, 0 = 20 s
+---
+bool success
+string message
+string version                  # version that was written
+string slot                     # slot that was written

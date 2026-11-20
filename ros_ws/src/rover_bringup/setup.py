@@ -17,6 +17,7 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
+    extras_require={'test': ['pytest']},
     maintainer='cbm',
     maintainer_email='chrisbmikkelsen@gmail.com',
     description='Bringup launch files for the rover',

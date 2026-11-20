@@ -1,0 +1,5 @@
+# Ask the STM32 for INFO now (instead of waiting for the next poll)
+---
+bool success
+string message
+FirmwareInfo info
